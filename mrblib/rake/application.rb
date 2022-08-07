@@ -327,7 +327,11 @@ module Rake
       name, args = parse_task_string(task_string)
       # t = self[name] # MRUBY: TODO: not the same.
       t = @tasks[name]
-      puts "Invoking task: #{name}"
+      if t
+        puts "Invoking task: '#{name}'"
+      else
+        raise "Could not execute! Task is undefined: '#{name}'"
+      end
       t.invoke(*args)
     end
 
